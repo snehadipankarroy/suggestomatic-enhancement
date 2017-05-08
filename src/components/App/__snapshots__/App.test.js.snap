@@ -1,0 +1,21 @@
+exports[`test matches the snapshot 1`] = `
+<div
+  className="container">
+  <label>
+    <h1>
+      Gene Suggestomatic
+    </h1>
+    <input
+      onChange={[Function]}
+      placeholder="start typing"
+      type="text" />
+  </label>
+  <section
+    className="suggestions">
+    <div
+      className="error">
+      No suggestions
+    </div>
+  </section>
+</div>
+`;

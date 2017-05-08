@@ -1,0 +1,42 @@
+exports[`async actions creates FETCH_TODOS_SUCCESS when fetching todos has been done 1`] = `
+Array [
+  Object {
+    "text": "PAD4",
+    "type": "SUGGESTIONS_REQUEST",
+  },
+  Object {
+    "response": Array [
+      Object {
+        "name": "Gene",
+        "suggestions": Array [
+          Object {
+            "category": "Gene",
+            "display_name": "PAD4",
+            "fq_field": "_terms",
+            "fq_value": "PAD4",
+            "id": "_term_180198",
+            "num_genes": 11,
+            "score": 1,
+          },
+        ],
+      },
+      Object {
+        "name": "InterPro",
+        "suggestions": Array [
+          Object {
+            "category": "InterPro",
+            "display_name": "SIZ1_plant",
+            "fq_field": "domains__ancestors",
+            "fq_value": "31141",
+            "id": "IPR031141",
+            "num_genes": 85,
+            "score": 1,
+          },
+        ],
+      },
+    ],
+    "text": "PAD4",
+    "type": "SUGGESTIONS_SUCCESS",
+  },
+]
+`;
