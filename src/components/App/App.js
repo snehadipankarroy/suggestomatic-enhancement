@@ -7,11 +7,14 @@ import './App.css';
 import { store } from '../../state/store';
 import Input from "../Input/Input";
 import Suggestions from "../Suggestions/Suggestions";
+import SelectedGene from "../SelectedGene/SelectedGene";
+
 
 const App = () => (
     <div className="container">
       <Input/>
       <Suggestions/>
+      <SelectedGene/>
     </div>
 );
 

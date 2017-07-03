@@ -1,24 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import {retrieveSelectedSuggestion} from "../../state/actions";
 
-import './Suggestions.css'
+import './Suggestions.css';
 
-const Suggestion = ({suggestion}) =>
-  <li className="suggestion">
-    <a>{suggestion.display_name}</a>
-  </li>;
-
-const Category = ({name, suggestions}) =>
-  <div className="category">
-    <h2>{name}</h2>
-    <ul>
-      {suggestions.map(s => <Suggestion key={s.id} suggestion={s}/>)}
-    </ul>
-  </div>;
-
-const Suggestions = ({isFetching, categories}) => {
+const Suggestions = ({isFetching, categories, onClick}) => {
   let content;
+
+  const Category = ({name, suggestions}) =>
+    <div className="category">
+      <h2>{name}</h2>
+      <ul>
+        {suggestions.map(s => <Suggestion key={s.id} suggestion={s}/>)}
+      </ul>
+    </div>;
+
+    const Suggestion = ({suggestion}) =>
+      <li className="suggestion">
+        <a onClick={e => onClick(e.target.innerHTML)}>{suggestion.display_name}</a>
+      </li>;
+
   if(isFetching) {
     content = <div className="loading">Loading</div>;
   }
@@ -39,6 +41,10 @@ const mapStateToProps = (state) => {
   return state.suggestionsForText[state.suggestText] || {};
 };
 
-const ConnectedSuggestions = connect(mapStateToProps)(Suggestions);
+const mapDispatchToProps = dispatch => ({
+  onClick: text => dispatch(retrieveSelectedSuggestion(text))
+});
+
+const ConnectedSuggestions = connect(mapStateToProps, mapDispatchToProps)(Suggestions);
 
 export default ConnectedSuggestions;

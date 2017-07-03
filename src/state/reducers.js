@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import {SUGGESTIONS_REQUEST, SUGGESTIONS_FAILURE, SUGGESTIONS_SUCCESS} from './actions';
+import {SUGGESTIONS_REQUEST, SUGGESTIONS_FAILURE, SUGGESTIONS_SUCCESS, SELECT_SUGGESTION} from './actions';
 
 // const exampleState = {
 //   suggestText: 'PAD4',
@@ -25,8 +25,23 @@ const suggestions = (state = { isFetching: false, categories: [] }, action) => {
     case SUGGESTIONS_FAILURE: {
       return Object.assign({}, state, {isFetching: false, categories: action.error})
     }
+    case SELECT_SUGGESTION: {
+      return Object.assign({}, state, {isFetching: false, categories: action.response})
+    }
     default:
       return state;
+  }
+};
+
+const suggestSelect = (state = { isFetching: false, categories: [] }, action) => {
+  switch(action.type) {
+    case SELECT_SUGGESTION: {
+      console.log(action.text);
+      return Object.assign({}, state, {isFetching: false, categories: action.response, text: action.text})
+    }
+    default: {
+      return state;
+    }
   }
 };
 
@@ -45,7 +60,8 @@ const suggestionsForText = (state = {}, action) => {
   switch (action.type) {
     case SUGGESTIONS_SUCCESS:
     case SUGGESTIONS_FAILURE:
-    case SUGGESTIONS_REQUEST: {
+    case SUGGESTIONS_REQUEST:
+    {
       return Object.assign({}, state, {
         [action.text]: suggestions(state[action.suggestText], action)
       })
@@ -57,7 +73,8 @@ const suggestionsForText = (state = {}, action) => {
 
 const rootReducer = combineReducers({
   suggestText,
-  suggestionsForText
+  suggestionsForText,
+  suggestSelect
 });
 
 export default rootReducer;
